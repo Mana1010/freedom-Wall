@@ -1,19 +1,18 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongodb_1 = require("mongodb");
-let db;
-const dbConnection = {
-    connectToDb: async (cb) => {
-        try {
-            const connectDb = await mongodb_1.MongoClient.connect("mongodb://localhost:27017/freedomwall");
-            db = connectDb.db();
-            return cb();
-        }
-        catch (err) {
-            console.error(err);
-            return cb(err);
-        }
-    },
-    getDb: () => db,
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.default = dbConnection;
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+require("dotenv/config");
+const connectDb = async () => {
+    try {
+        await mongoose_1.default.connect(process.env.MONGO_URI);
+        console.log("Successfully connected");
+    }
+    catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+};
+exports.default = connectDb;

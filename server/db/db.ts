@@ -1,20 +1,12 @@
-import { MongoClient, Db } from "mongodb";
-
-let db: Db;
-
-const dbConnection = {
-  connectToDb: async (cb: any) => {
-    try {
-      const connectDb = await MongoClient.connect(
-        "mongodb://localhost:27017/freedomwall"
-      );
-      db = connectDb.db();
-      return cb();
-    } catch (err) {
-      console.error(err);
-      return cb(err);
-    }
-  },
-  getDb: () => db,
+import mongoose from "mongoose";
+import "dotenv/config";
+const connectDb = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI as string);
+    console.log("Successfully connected");
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
 };
-export default dbConnection;
+export default connectDb;
