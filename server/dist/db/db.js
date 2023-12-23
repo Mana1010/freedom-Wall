@@ -8,7 +8,6 @@ require("dotenv/config");
 const connectDb = async () => {
     try {
         await mongoose_1.default.connect(process.env.MONGO_URI);
-        console.log("Successfully connected");
     }
     catch (err) {
         console.log(err);
