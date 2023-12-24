@@ -13,7 +13,7 @@ app.post("/", async (req, res) => {
   try {
     const getId = await User.create({ name, rants });
     res.status(201).json({
-      message: "Successfully adding your name into the database",
+      message: "Successfully adding your rant into the database",
       userId: getId._id,
     });
   } catch (err) {

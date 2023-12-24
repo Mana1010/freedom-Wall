@@ -7,5 +7,9 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const userSchema = new mongoose_1.default.Schema({
     name: String,
     rants: String,
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
 });
 exports.default = mongoose_1.default.model("User", userSchema);
